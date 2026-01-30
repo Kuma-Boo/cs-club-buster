@@ -7,13 +7,15 @@ var is_processing_menu : bool
 var current_selection : int = 0
 var previous_input_sign : int
 var activation_timer : float
+var use_activation_timer : bool
 
 func _enter_tree() -> void:
 	instance = self
+	activation_timer = 0
 
 func _process(_delta: float) -> void:
 	if !is_processing_menu:
-		if !is_zero_approx(activation_timer):
+		if use_activation_timer:
 			activation_timer = move_toward(activation_timer, 0, get_process_delta_time())
 			if is_zero_approx(activation_timer):
 				show_menu()
@@ -32,9 +34,11 @@ func _process(_delta: float) -> void:
 
 func show_menu_with_delay(time : float) -> void:
 	activation_timer = time
+	use_activation_timer = true
 
 func show_menu() -> void:
 	animator.play("show")
+	use_activation_timer = false
 
 func on_menu_shown() -> void:
 	is_processing_menu = true
