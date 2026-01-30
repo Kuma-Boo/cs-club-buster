@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8po21fsi87q5"]
+
+[ext_resource type="PackedScene" uid="uid://gn1jfkrk1gwn" path="res://scene/object/game_board.tscn" id="1_k3ndx"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="."]
+z_index = -100
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.8215152, 0.8746711, 0.98094445, 1)
+
+[node name="GameBoard1" parent="." instance=ExtResource("1_k3ndx")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -160.0
+offset_right = -192.0
+offset_bottom = -160.0
+grow_horizontal = 2
+grow_vertical = 0
+movement_interval = 100.0

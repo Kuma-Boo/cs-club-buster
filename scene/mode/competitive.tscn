@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://ocj0n8c4ryb6"]
+
+[ext_resource type="PackedScene" uid="uid://gn1jfkrk1gwn" path="res://scene/object/game_board.tscn" id="1_f2obq"]
+[ext_resource type="PackedScene" uid="uid://cmk4oy0awp3og" path="res://scene/menu/result_menu.tscn" id="2_f2obq"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="."]
+z_index = -100
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.8215152, 0.8746711, 0.98094445, 1)
+
+[node name="GameBoards" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 130.0
+offset_top = -180.0
+offset_bottom = -129.88635
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 750
+alignment = 1
+
+[node name="GameBoard1" parent="GameBoards" instance=ExtResource("1_f2obq")]
+layout_mode = 2
+
+[node name="GameBoard2" parent="GameBoards" instance=ExtResource("1_f2obq")]
+layout_mode = 2
+board_index = 2
+
+[node name="ResultMenu" parent="." instance=ExtResource("2_f2obq")]
+layout_mode = 1
+
+[connection signal="blocks_sent" from="GameBoards/GameBoard1" to="GameBoards/GameBoard2" method="recieve_penalty_blocks"]
+[connection signal="blocks_sent" from="GameBoards/GameBoard2" to="GameBoards/GameBoard1" method="recieve_penalty_blocks"]

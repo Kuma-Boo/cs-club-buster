@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvbklfjoeitri"]
+
+[ext_resource type="PackedScene" uid="uid://gn1jfkrk1gwn" path="res://scene/object/game_board.tscn" id="1_7iu3m"]
+[ext_resource type="PackedScene" uid="uid://bor27i7u4t458" path="res://scene/interfaces/endless_hud.tscn" id="2_rtsw2"]
+[ext_resource type="PackedScene" uid="uid://cmk4oy0awp3og" path="res://scene/menu/result_menu.tscn" id="3_0wqvh"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="."]
+z_index = -100
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.8215152, 0.8746711, 0.98094445, 1)
+
+[node name="GameBoard1" parent="." instance=ExtResource("1_7iu3m")]
+layout_mode = 0
+offset_left = 536.0
+offset_top = 728.0
+offset_right = 536.0
+offset_bottom = 728.0
+
+[node name="EndlessHud" parent="." instance=ExtResource("2_rtsw2")]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 1.0
+offset_left = 64.0
+offset_top = 160.0
+offset_right = -192.0
+offset_bottom = -544.0
+
+[node name="ResultMenu" parent="." instance=ExtResource("3_0wqvh")]
+layout_mode = 1
+
+[connection signal="blocks_destroyed" from="GameBoard1" to="EndlessHud" method="on_blocks_destroyed"]
+[connection signal="board_cleared" from="GameBoard1" to="EndlessHud" method="on_board_cleared"]
+[connection signal="board_filled" from="GameBoard1" to="EndlessHud" method="end_game"]
+[connection signal="board_filled_no_ref" from="GameBoard1" to="ResultMenu" method="show_menu"]
+[connection signal="board_started" from="GameBoard1" to="EndlessHud" method="start_game"]
+[connection signal="chain_ended" from="GameBoard1" to="EndlessHud" method="on_chain_ended"]

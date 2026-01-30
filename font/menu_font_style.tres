@@ -1,0 +1,12 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cb2foqdrue5l3"]
+
+[ext_resource type="FontFile" uid="uid://ckmbv01aowrqo" path="res://font/CourierPrime-Bold.ttf" id="1_dh2gd"]
+
+[resource]
+font = ExtResource("1_dh2gd")
+font_size = 48
+font_color = Color(0.35105014, 0.7922217, 0.99999994, 1)
+outline_size = 10
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.78431374)
+shadow_offset = Vector2(0, 5)

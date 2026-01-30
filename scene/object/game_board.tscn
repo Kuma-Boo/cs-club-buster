@@ -1,0 +1,852 @@
+[gd_scene load_steps=22 format=3 uid="uid://gn1jfkrk1gwn"]
+
+[ext_resource type="Script" uid="uid://d2ngc4fdiqkvh" path="res://script/game/board/board_manager.gd" id="1_mguay"]
+[ext_resource type="PackedScene" uid="uid://cv8apd372btxh" path="res://scene/object/block_spawner.tscn" id="2_mguay"]
+[ext_resource type="Texture2D" uid="uid://cy047cekfcaif" path="res://img/grid.png" id="3_8hkar"]
+[ext_resource type="Texture2D" uid="uid://cjajtb6oyg6ou" path="res://img/penalty.png" id="4_370jt"]
+[ext_resource type="Script" uid="uid://bbps8aetcc3y8" path="res://script/game/board/penalty_manager.gd" id="4_k1sjy"]
+[ext_resource type="Script" uid="uid://bcgwoa3ea3uvf" path="res://script/game/board/result_interface.gd" id="4_n4tym"]
+[ext_resource type="Texture2D" uid="uid://ddej0op5hk5hu" path="res://img/next.png" id="4_rfunl"]
+[ext_resource type="Script" uid="uid://oy73aolinup2" path="res://script/game/board/input_manager.gd" id="6_5yovw"]
+[ext_resource type="Texture2D" uid="uid://bd0n1he08lvus" path="res://font/text_gradient.tres" id="6_p47mm"]
+[ext_resource type="LabelSettings" uid="uid://cnlnip3nxgafr" path="res://font/hud_font_style.tres" id="7_x58x5"]
+[ext_resource type="PackedScene" uid="uid://mosakakwohrx" path="res://scene/object/block.tscn" id="8_pljjn"]
+[ext_resource type="Texture2D" uid="uid://duppeoitwm6kx" path="res://img/border.png" id="10_hg6bp"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n4tym"]
+blend_mode = 3
+light_mode = 1
+
+[sub_resource type="Animation" id="Animation_cv0c3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BG:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:anchor_top")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+
+[sub_resource type="Animation" id="Animation_hqp30"]
+resource_name = "init"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BG:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.2, 0.40000004, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(1.2, 1), Vector2(1, 1), Vector2(1, 1), Vector2(1, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_processing_board"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_txjv5"]
+resource_name = "lose"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0), Vector2(1, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BG:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:anchor_top")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.099999994),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.5]
+}
+
+[sub_resource type="Animation" id="Animation_wcobp"]
+resource_name = "win"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(1.2, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BG:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hg6bp"]
+_data = {
+&"RESET": SubResource("Animation_cv0c3"),
+&"init": SubResource("Animation_hqp30"),
+&"lose": SubResource("Animation_txjv5"),
+&"win": SubResource("Animation_wcobp")
+}
+
+[sub_resource type="Animation" id="Animation_5yovw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RowRoot:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_370jt"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RowRoot:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(1.2, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5yovw"]
+_data = {
+&"RESET": SubResource("Animation_5yovw"),
+&"show": SubResource("Animation_370jt")
+}
+
+[node name="GameBoard" type="Control" node_paths=PackedStringArray("input_manager", "penalty_manager", "block_spawner", "results", "preview_block")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_mguay")
+input_manager = NodePath("Input")
+penalty_manager = NodePath("Root/PenaltyManager")
+block_spawner = NodePath("Root/BlockParent/BlockSpawner")
+results = NodePath("Root/Results")
+preview_block = NodePath("Root/Next/PreviewBlock/Block")
+board_size = Vector2i(6, 8)
+
+[node name="Input" type="Node" parent="."]
+script = ExtResource("6_5yovw")
+
+[node name="Root" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -192.0
+offset_top = -512.0
+offset_right = 192.0
+
+[node name="BG" type="ColorRect" parent="Root"]
+z_index = -5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="Board" type="VBoxContainer" parent="Root"]
+modulate = Color(1, 1, 1, 0.39215687)
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Row1" type="HBoxContainer" parent="Root/Board"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Cell1" type="TextureRect" parent="Root/Board/Row1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell2" type="TextureRect" parent="Root/Board/Row1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell3" type="TextureRect" parent="Root/Board/Row1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell4" type="TextureRect" parent="Root/Board/Row1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell5" type="TextureRect" parent="Root/Board/Row1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell6" type="TextureRect" parent="Root/Board/Row1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Row2" type="HBoxContainer" parent="Root/Board"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Cell1" type="TextureRect" parent="Root/Board/Row2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell2" type="TextureRect" parent="Root/Board/Row2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell3" type="TextureRect" parent="Root/Board/Row2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell4" type="TextureRect" parent="Root/Board/Row2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell5" type="TextureRect" parent="Root/Board/Row2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell6" type="TextureRect" parent="Root/Board/Row2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Row3" type="HBoxContainer" parent="Root/Board"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Cell1" type="TextureRect" parent="Root/Board/Row3"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell2" type="TextureRect" parent="Root/Board/Row3"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell3" type="TextureRect" parent="Root/Board/Row3"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell4" type="TextureRect" parent="Root/Board/Row3"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell5" type="TextureRect" parent="Root/Board/Row3"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell6" type="TextureRect" parent="Root/Board/Row3"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Row4" type="HBoxContainer" parent="Root/Board"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Cell1" type="TextureRect" parent="Root/Board/Row4"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell2" type="TextureRect" parent="Root/Board/Row4"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell3" type="TextureRect" parent="Root/Board/Row4"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell4" type="TextureRect" parent="Root/Board/Row4"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell5" type="TextureRect" parent="Root/Board/Row4"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell6" type="TextureRect" parent="Root/Board/Row4"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Row5" type="HBoxContainer" parent="Root/Board"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Cell1" type="TextureRect" parent="Root/Board/Row5"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell2" type="TextureRect" parent="Root/Board/Row5"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell3" type="TextureRect" parent="Root/Board/Row5"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell4" type="TextureRect" parent="Root/Board/Row5"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell5" type="TextureRect" parent="Root/Board/Row5"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell6" type="TextureRect" parent="Root/Board/Row5"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Row6" type="HBoxContainer" parent="Root/Board"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Cell1" type="TextureRect" parent="Root/Board/Row6"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell2" type="TextureRect" parent="Root/Board/Row6"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell3" type="TextureRect" parent="Root/Board/Row6"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell4" type="TextureRect" parent="Root/Board/Row6"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell5" type="TextureRect" parent="Root/Board/Row6"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell6" type="TextureRect" parent="Root/Board/Row6"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Row7" type="HBoxContainer" parent="Root/Board"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Cell1" type="TextureRect" parent="Root/Board/Row7"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell2" type="TextureRect" parent="Root/Board/Row7"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell3" type="TextureRect" parent="Root/Board/Row7"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell4" type="TextureRect" parent="Root/Board/Row7"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell5" type="TextureRect" parent="Root/Board/Row7"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell6" type="TextureRect" parent="Root/Board/Row7"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Row8" type="HBoxContainer" parent="Root/Board"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Cell1" type="TextureRect" parent="Root/Board/Row8"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell2" type="TextureRect" parent="Root/Board/Row8"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell3" type="TextureRect" parent="Root/Board/Row8"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell4" type="TextureRect" parent="Root/Board/Row8"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell5" type="TextureRect" parent="Root/Board/Row8"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Cell6" type="TextureRect" parent="Root/Board/Row8"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_8hkar")
+expand_mode = 1
+
+[node name="Next" type="TextureRect" parent="Root"]
+z_index = -2
+layout_mode = 0
+offset_left = -216.0
+offset_top = -32.0
+offset_right = -24.0
+offset_bottom = 224.0
+texture = ExtResource("4_rfunl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PreviewBlock" type="Control" parent="Root/Next"]
+z_index = 2
+anchors_preset = 0
+offset_left = 104.0
+offset_top = 176.0
+offset_right = 104.0
+offset_bottom = 176.0
+
+[node name="Next" type="Label" parent="Root/Next/PreviewBlock"]
+clip_children = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -120.0
+offset_right = 64.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "NEXT"
+label_settings = ExtResource("7_x58x5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gradient" type="TextureRect" parent="Root/Next/PreviewBlock/Next"]
+material = SubResource("CanvasItemMaterial_n4tym")
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_p47mm")
+expand_mode = 1
+
+[node name="Block" parent="Root/Next/PreviewBlock" instance=ExtResource("8_pljjn")]
+
+[node name="BlockParent" type="Control" parent="Root"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BlockSpawner" parent="Root/BlockParent" node_paths=PackedStringArray("block_parent") instance=ExtResource("2_mguay")]
+block_parent = NodePath("..")
+
+[node name="Results" type="Control" parent="Root" node_paths=PackedStringArray("result_label", "result_animation_player")]
+z_index = 10
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_n4tym")
+result_label = NodePath("ResultLabel")
+result_animation_player = NodePath("ResultLabel/AnimationPlayer")
+
+[node name="BG" type="ColorRect" parent="Root/Results"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="ResultLabel" type="Label" parent="Root/Results"]
+clip_children = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -27.5
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(256, 32)
+text = " START!"
+label_settings = ExtResource("7_x58x5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gradient" type="TextureRect" parent="Root/Results/ResultLabel"]
+material = SubResource("CanvasItemMaterial_n4tym")
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_p47mm")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Root/Results/ResultLabel"]
+libraries = {
+&"": SubResource("AnimationLibrary_hg6bp")
+}
+autoplay = "init"
+
+[node name="Borders" type="NinePatchRect" parent="Root"]
+z_index = 20
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_top = -56.000015
+offset_right = 56.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(256, 313)
+texture = ExtResource("10_hg6bp")
+draw_center = false
+region_rect = Rect2(0, 0, 512, 512)
+patch_margin_left = 64
+patch_margin_top = 64
+patch_margin_right = 72
+patch_margin_bottom = 56
+
+[node name="PenaltyManager" type="Control" parent="Root" node_paths=PackedStringArray("animation_player", "penalty_icons")]
+z_index = 30
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+script = ExtResource("4_k1sjy")
+animation_player = NodePath("AnimationPlayer")
+penalty_icons = [NodePath("RowRoot/Row1/Penalty1"), NodePath("RowRoot/Row1/Penalty2"), NodePath("RowRoot/Row1/Penalty3"), NodePath("RowRoot/Row1/Penalty4"), NodePath("RowRoot/Row1/Penalty5"), NodePath("RowRoot/Row1/Penalty6"), NodePath("RowRoot/Row2/Penalty1"), NodePath("RowRoot/Row2/Penalty2"), NodePath("RowRoot/Row2/Penalty3"), NodePath("RowRoot/Row2/Penalty4"), NodePath("RowRoot/Row2/Penalty5"), NodePath("RowRoot/Row2/Penalty6")]
+
+[node name="RowRoot" type="Control" parent="Root/PenaltyManager"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(256, 0)
+
+[node name="Row2" type="HBoxContainer" parent="Root/PenaltyManager/RowRoot"]
+modulate = Color(0.6255971, 0.6255971, 0.6255971, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(256, 0)
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Penalty1" type="TextureRect" parent="Root/PenaltyManager/RowRoot/Row2"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("4_370jt")
+expand_mode = 1
+
+[node name="Penalty2" type="TextureRect" parent="Root/PenaltyManager/RowRoot/Row2"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("4_370jt")
+expand_mode = 1
+
+[node name="Penalty3" type="TextureRect" parent="Root/PenaltyManager/RowRoot/Row2"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("4_370jt")
+expand_mode = 1
+
+[node name="Penalty4" type="TextureRect" parent="Root/PenaltyManager/RowRoot/Row2"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("4_370jt")
+expand_mode = 1
+
+[node name="Penalty5" type="TextureRect" parent="Root/PenaltyManager/RowRoot/Row2"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("4_370jt")
+expand_mode = 1
+
+[node name="Penalty6" type="TextureRect" parent="Root/PenaltyManager/RowRoot/Row2"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("4_370jt")
+expand_mode = 1
+
+[node name="Row1" type="HBoxContainer" parent="Root/PenaltyManager/RowRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(256, 0)
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Penalty1" type="TextureRect" parent="Root/PenaltyManager/RowRoot/Row1"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("4_370jt")
+expand_mode = 1
+
+[node name="Penalty2" type="TextureRect" parent="Root/PenaltyManager/RowRoot/Row1"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("4_370jt")
+expand_mode = 1
+
+[node name="Penalty3" type="TextureRect" parent="Root/PenaltyManager/RowRoot/Row1"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("4_370jt")
+expand_mode = 1
+
+[node name="Penalty4" type="TextureRect" parent="Root/PenaltyManager/RowRoot/Row1"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("4_370jt")
+expand_mode = 1
+
+[node name="Penalty5" type="TextureRect" parent="Root/PenaltyManager/RowRoot/Row1"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("4_370jt")
+expand_mode = 1
+
+[node name="Penalty6" type="TextureRect" parent="Root/PenaltyManager/RowRoot/Row1"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("4_370jt")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Root/PenaltyManager"]
+libraries = {
+&"": SubResource("AnimationLibrary_5yovw")
+}
+
+[connection signal="on_lose" from="Root/Results" to="." method="stop_processing_board"]
+[connection signal="on_win" from="Root/Results" to="." method="stop_processing_board"]

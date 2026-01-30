@@ -1,0 +1,90 @@
+[gd_scene load_steps=7 format=3 uid="uid://cv8apd372btxh"]
+
+[ext_resource type="Script" uid="uid://f8ja0sp3fng3" path="res://script/game/board/block_spawner.gd" id="1_82tku"]
+[ext_resource type="PackedScene" uid="uid://mosakakwohrx" path="res://scene/object/block.tscn" id="2_1hjw8"]
+[ext_resource type="Texture2D" uid="uid://bixmlv6pbypeq" path="res://img/spawn.png" id="2_ymetv"]
+
+[sub_resource type="Animation" id="Animation_1hjw8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Root/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ymetv"]
+resource_name = "loop"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.3, 0.46666667, 0.6333333, 1.0666667, 1.2666668, 1.4666667),
+"transitions": PackedFloat32Array(2, 1, 1, 0.5, 1, 2, 0.5, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(-1, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(1, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Root/Sprite2D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -8), Vector2(0, 0), Vector2(0, -8), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uu8wh"]
+_data = {
+&"RESET": SubResource("Animation_1hjw8"),
+&"loop": SubResource("Animation_ymetv")
+}
+
+[node name="BlockSpawner" type="Node2D"]
+script = ExtResource("1_82tku")
+block_scene = ExtResource("2_1hjw8")
+
+[node name="Root" type="Node2D" parent="."]
+position = Vector2(0, -32)
+scale = Vector2(0.25, 0.25)
+
+[node name="Sprite2D" type="Sprite2D" parent="Root"]
+texture = ExtResource("2_ymetv")
+
+[node name="Shadow" type="Sprite2D" parent="Root/Sprite2D"]
+modulate = Color(0, 0, 0, 0.5882353)
+z_index = -1
+position = Vector2(0, 16)
+texture = ExtResource("2_ymetv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_uu8wh")
+}
+autoplay = "loop"
