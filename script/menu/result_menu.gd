@@ -20,7 +20,6 @@ func _exit_tree() -> void:
 	get_tree().paused = false
 
 func _process(_delta: float) -> void:
-	print(allow_pausing)
 	if !is_processing_menu:
 		if use_activation_timer:
 			activation_timer = move_toward(activation_timer, 0, get_process_delta_time())
