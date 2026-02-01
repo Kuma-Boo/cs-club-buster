@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cmk4oy0awp3og"]
+[gd_scene load_steps=13 format=3 uid="uid://cmk4oy0awp3og"]
 
 [ext_resource type="Script" uid="uid://tta3wr5vsqmq" path="res://script/menu/result_menu.gd" id="1_wcewc"]
 [ext_resource type="Texture2D" uid="uid://cge5tsmtyancl" path="res://img/menu button.png" id="2_cv8do"]
@@ -22,7 +22,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Rematch/Glow:visible")
+tracks/1/path = NodePath("Options/Rematch/Glow:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -34,7 +34,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Rematch/Glow:modulate")
+tracks/2/path = NodePath("Options/Rematch/Glow:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -46,7 +46,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MainMenu/Glow:visible")
+tracks/3/path = NodePath("Options/MainMenu/Glow:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -58,7 +58,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("MainMenu/Glow:modulate")
+tracks/4/path = NodePath("Options/MainMenu/Glow:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -70,7 +70,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("MainMenu/Glow:scale")
+tracks/5/path = NodePath("Options/MainMenu/Glow:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -82,7 +82,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Rematch/Glow:scale")
+tracks/6/path = NodePath("Options/Rematch/Glow:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -103,6 +103,54 @@ tracks/7/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 0)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Options/Continue/Glow:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Options/Continue/Glow:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Options/Continue/Glow:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Options/Continue/Glow:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_4rjoa"]
 resource_name = "select"
@@ -111,7 +159,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Rematch/Glow:modulate")
+tracks/0/path = NodePath("Options/Rematch/Glow:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -123,7 +171,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MainMenu/Glow:modulate")
+tracks/1/path = NodePath("Options/MainMenu/Glow:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -135,7 +183,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MainMenu/Glow:scale")
+tracks/2/path = NodePath("Options/MainMenu/Glow:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -147,7 +195,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Rematch/Glow:scale")
+tracks/3/path = NodePath("Options/Rematch/Glow:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -190,7 +238,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Rematch/Glow:visible")
+tracks/0/path = NodePath("Options/Continue/Glow:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -202,7 +250,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Rematch/Glow:modulate")
+tracks/1/path = NodePath("Options/Continue/Glow:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -214,10 +262,22 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MainMenu/Glow:visible")
+tracks/2/path = NodePath("Options/Rematch/Glow:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Options/MainMenu/Glow:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -231,7 +291,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MainMenu/Glow:visible")
+tracks/0/path = NodePath("Options/Rematch/Glow:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -243,7 +303,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MainMenu/Glow:modulate")
+tracks/1/path = NodePath("Options/Rematch/Glow:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -255,10 +315,22 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Rematch/Glow:visible")
+tracks/2/path = NodePath("Options/MainMenu/Glow:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Options/Continue/Glow:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -281,22 +353,53 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Rematch/Glow:modulate")
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_menu_shown"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_fii8v"]
+resource_name = "select-2"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Options/MainMenu/Glow:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Options/MainMenu/Glow:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MainMenu/Glow:visible")
+tracks/2/path = NodePath("Options/Rematch/Glow:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -304,6 +407,59 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Options/Continue/Glow:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_tkmqr"]
+resource_name = "hide"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Options/Continue/Glow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Options/Continue/Glow:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -316,20 +472,23 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"on_menu_shown"
+"method": &"unpause"
 }]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n8md4"]
 _data = {
 &"RESET": SubResource("Animation_n8md4"),
+&"hide": SubResource("Animation_tkmqr"),
 &"select": SubResource("Animation_4rjoa"),
 &"select-0": SubResource("Animation_sxu1c"),
 &"select-1": SubResource("Animation_8p48u"),
+&"select-2": SubResource("Animation_fii8v"),
 &"show": SubResource("Animation_wcewc")
 }
 
-[node name="ResultMenu" type="Control" node_paths=PackedStringArray("animator")]
+[node name="ResultMenu" type="Control" node_paths=PackedStringArray("animator", "continue_option")]
+process_mode = 3
 modulate = Color(1, 1, 1, 0)
 z_index = 100
 z_as_relative = false
@@ -341,6 +500,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wcewc")
 animator = NodePath("AnimationPlayer")
+continue_option = NodePath("Options/Continue")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -351,19 +511,23 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.39215687)
 
-[node name="Rematch" type="Control" parent="."]
+[node name="Options" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
+anchor_bottom = 1.0
 offset_left = -320.0
-offset_top = 248.0
 offset_right = 320.0
-offset_bottom = 440.0
 grow_horizontal = 2
-pivot_offset = Vector2(320, 96)
+grow_vertical = 2
+alignment = 1
 
-[node name="Shadow" type="TextureRect" parent="Rematch"]
+[node name="Continue" type="Control" parent="Options"]
+custom_minimum_size = Vector2(640, 192)
+layout_mode = 2
+
+[node name="Shadow" type="TextureRect" parent="Options/Continue"]
 modulate = Color(0, 0, 0, 0.39215687)
 z_index = -1
 layout_mode = 1
@@ -377,74 +541,7 @@ grow_vertical = 2
 texture = ExtResource("2_cv8do")
 expand_mode = 1
 
-[node name="Glow" type="NinePatchRect" parent="Rematch"]
-z_index = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -56.0
-offset_right = 40.0
-offset_bottom = 56.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(360, 152)
-texture = ExtResource("4_sxu1c")
-patch_margin_left = 128
-patch_margin_top = 128
-patch_margin_right = 128
-patch_margin_bottom = 128
-
-[node name="MenuButton" type="TextureRect" parent="Rematch"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_cv8do")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="Rematch/MenuButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "PLAY AGAIN"
-label_settings = ExtResource("3_sxu1c")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MainMenu" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -320.0
-offset_top = 504.0
-offset_right = 320.0
-offset_bottom = 696.0
-grow_horizontal = 2
-pivot_offset = Vector2(320, 96)
-
-[node name="Shadow" type="TextureRect" parent="MainMenu"]
-modulate = Color(0, 0, 0, 0.39215687)
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 16.0
-offset_bottom = 16.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_cv8do")
-expand_mode = 1
-
-[node name="Glow" type="NinePatchRect" parent="MainMenu"]
+[node name="Glow" type="NinePatchRect" parent="Options/Continue"]
 visible = false
 z_index = 1
 layout_mode = 1
@@ -464,7 +561,7 @@ patch_margin_top = 128
 patch_margin_right = 128
 patch_margin_bottom = 128
 
-[node name="MenuButton" type="TextureRect" parent="MainMenu"]
+[node name="MenuButton" type="TextureRect" parent="Options/Continue"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -474,7 +571,126 @@ grow_vertical = 2
 texture = ExtResource("2_cv8do")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="MainMenu/MenuButton"]
+[node name="Label" type="Label" parent="Options/Continue/MenuButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CONTINUE"
+label_settings = ExtResource("3_sxu1c")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rematch" type="Control" parent="Options"]
+custom_minimum_size = Vector2(640, 192)
+layout_mode = 2
+
+[node name="Shadow" type="TextureRect" parent="Options/Rematch"]
+modulate = Color(0, 0, 0, 0.39215687)
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cv8do")
+expand_mode = 1
+
+[node name="Glow" type="NinePatchRect" parent="Options/Rematch"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -56.0
+offset_right = 40.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(360, 152)
+texture = ExtResource("4_sxu1c")
+patch_margin_left = 128
+patch_margin_top = 128
+patch_margin_right = 128
+patch_margin_bottom = 128
+
+[node name="MenuButton" type="TextureRect" parent="Options/Rematch"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cv8do")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Options/Rematch/MenuButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PLAY AGAIN"
+label_settings = ExtResource("3_sxu1c")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainMenu" type="Control" parent="Options"]
+custom_minimum_size = Vector2(640, 192)
+layout_mode = 2
+
+[node name="Shadow" type="TextureRect" parent="Options/MainMenu"]
+modulate = Color(0, 0, 0, 0.39215687)
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cv8do")
+expand_mode = 1
+
+[node name="Glow" type="NinePatchRect" parent="Options/MainMenu"]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -56.0
+offset_right = 40.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(360, 152)
+texture = ExtResource("4_sxu1c")
+patch_margin_left = 128
+patch_margin_top = 128
+patch_margin_right = 128
+patch_margin_bottom = 128
+
+[node name="MenuButton" type="TextureRect" parent="Options/MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cv8do")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Options/MainMenu/MenuButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
