@@ -58,6 +58,7 @@ func get_block_spawn_position() -> Vector2i:
 	return return_value
 
 ## Updates the number of penalty blocks queued to fall.
+@rpc("any_peer", "call_local")
 func update_penalty_blocks(amount : int) -> void:
 	drop_penalty_blocks_immediately = amount > 0
 	penalty_block_count += amount

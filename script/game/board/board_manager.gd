@@ -55,8 +55,7 @@ func start_game() -> void:
 	
 	if !NetworkManager.is_hosting_game:
 		return
-	print("game rpc started")
-		
+	
 	rpc("start_rpc_game")
 
 @rpc("any_peer", "call_local")
@@ -398,7 +397,7 @@ func update_penalties() -> void:
 
 ## Called when receiving penalty blocks from another player.
 func recieve_penalty_blocks(count : int) -> void:
-	penalty_manager.update_penalty_blocks(count)
+	penalty_manager.rpc("update_penalty_blocks", count)
 
 ## Tracks whether blocks are currently being destroyed.
 var is_destroying_blocks : bool
