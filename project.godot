@@ -21,11 +21,15 @@ config/icon="res://icon.svg"
 BoardObserver="*res://script/autoload/board_observer.gd"
 Noray="*res://addons/netfox.noray/noray.gd"
 PacketHandshake="*res://addons/netfox.noray/packet-handshake.gd"
+NetworkManager="*res://script/network/network_manager.gd"
 
 [display]
 
 window/size/viewport_width=1600
 window/size/viewport_height=900
+window/size/window_width_override=1024
+window/size/window_height_override=576
+window/stretch/mode="canvas_items"
 
 [dotnet]
 

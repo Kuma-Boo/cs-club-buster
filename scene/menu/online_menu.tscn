@@ -1,0 +1,330 @@
+[gd_scene load_steps=9 format=3 uid="uid://ckcb1tm8fevwr"]
+
+[ext_resource type="Script" uid="uid://b1hgswo2y1r4c" path="res://script/network/online_menu.gd" id="1_4ecg1"]
+[ext_resource type="FontFile" uid="uid://2kbr0bcerjt1" path="res://font/MochiyPopOne-Regular.ttf" id="1_lhkoh"]
+[ext_resource type="LabelSettings" uid="uid://cb2foqdrue5l3" path="res://font/menu_font_style.tres" id="3_sewva"]
+
+[sub_resource type="Animation" id="Animation_sewva"]
+resource_name = "game-created"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NetworkOptions/HBoxContainer/JoinButton:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NetworkOptions/HBoxContainer/CopyButton:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NetworkOptions/HBoxContainer/LineEdit:editable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Connecting:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Connecting/ConnectingLabel:text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["CONNECTED!"]
+}
+
+[sub_resource type="Animation" id="Animation_lv6x3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NetworkOptions/HBoxContainer/JoinButton:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NetworkOptions/HBoxContainer/CopyButton:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NetworkOptions/HBoxContainer/LineEdit:editable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Connecting:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Connecting/ConnectingLabel:text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["CONNECTING..."]
+}
+
+[sub_resource type="Animation" id="Animation_wnqb5"]
+resource_name = "copied"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Connecting:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Connecting/ConnectingLabel:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["COPIED!"]
+}
+
+[sub_resource type="Animation" id="Animation_gu8ca"]
+resource_name = "connecting"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Connecting:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Connecting/ConnectingLabel:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["CONNECTING..."]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wnqb5"]
+_data = {
+&"RESET": SubResource("Animation_lv6x3"),
+&"connecting": SubResource("Animation_gu8ca"),
+&"copied": SubResource("Animation_wnqb5"),
+&"game-created": SubResource("Animation_sewva")
+}
+
+[node name="OnlineMenu" type="Control" node_paths=PackedStringArray("animator", "game_id_line")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4ecg1")
+animator = NodePath("AnimationPlayer")
+game_id_line = NodePath("NetworkOptions/HBoxContainer/LineEdit")
+
+[node name="NetworkOptions" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -494.0
+offset_top = -64.5
+offset_right = 494.0
+offset_bottom = 64.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HostButton" type="Button" parent="NetworkOptions"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_lhkoh")
+theme_override_font_sizes/font_size = 32
+text = "HOST"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NetworkOptions"]
+layout_mode = 2
+theme_override_constants/separation = 48
+alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="NetworkOptions/HBoxContainer"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_lhkoh")
+theme_override_font_sizes/font_size = 32
+placeholder_text = "ENTER CODE HERE"
+
+[node name="JoinButton" type="Button" parent="NetworkOptions/HBoxContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_lhkoh")
+theme_override_font_sizes/font_size = 32
+text = "JOIN"
+
+[node name="CopyButton" type="Button" parent="NetworkOptions/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_lhkoh")
+theme_override_font_sizes/font_size = 32
+text = "COPY"
+
+[node name="ChatMessages" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -196.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -56.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 48
+alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_lhkoh")
+theme_override_font_sizes/font_size = 32
+editable = false
+
+[node name="Button" type="Button" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_lhkoh")
+theme_override_font_sizes/font_size = 32
+text = "CHAT"
+
+[node name="Connecting" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.78431374)
+
+[node name="ConnectingLabel" type="Label" parent="Connecting"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -27.5
+offset_right = 144.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "CONNECTING..."
+label_settings = ExtResource("3_sewva")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wnqb5")
+}
+
+[connection signal="pressed" from="NetworkOptions/HostButton" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="NetworkOptions/HBoxContainer/JoinButton" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="NetworkOptions/HBoxContainer/CopyButton" to="." method="_on_copy_pressed"]
