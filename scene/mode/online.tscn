@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwlgca34ny2t7"]
+
+[ext_resource type="PackedScene" uid="uid://cmk4oy0awp3og" path="res://scene/menu/result_menu.tscn" id="2_625ue"]
+[ext_resource type="Script" uid="uid://c5r6ecvr7fhed" path="res://script/network/multiplayer_manager.gd" id="2_p23wu"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="."]
+z_index = -100
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.8215152, 0.8746711, 0.98094445, 1)
+
+[node name="GameBoards" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 130.0
+offset_top = -180.0
+offset_bottom = -129.88635
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 750
+alignment = 1
+
+[node name="MultiplayerManager" type="Node" parent="." node_paths=PackedStringArray("_player_spawn_parent")]
+script = ExtResource("2_p23wu")
+_player_spawn_parent = NodePath("../GameBoards")
+
+[node name="ResultMenu" parent="." instance=ExtResource("2_625ue")]
+layout_mode = 1

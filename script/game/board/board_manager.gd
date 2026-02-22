@@ -23,7 +23,6 @@ var is_processing_board : bool
 @export var movement_interval : float = 0.5
 @export var lose_on_fill : bool = true
 
-@export_range(1, 4, 1) var board_index : int = 1
 @export var input_manager : InputManager
 @export var penalty_manager : PenaltyManager
 @export var block_spawner : BlockSpawner
@@ -43,7 +42,11 @@ var block_array : Array[Block]
 func _ready() -> void:
 	initialize_board()
 	initialize_block_spawner()
-	input_manager.player_index = board_index
+	
+	if multiplayer.multiplayer_peer.get_connection_status() != MultiplayerPeer.CONNECTION_CONNECTED:
+		input_manager.player_index = get_index() + 1
+	else:
+		input_manager.player_index = 1
 	penalty_manager.initialize_penalty_block_spawn_positions(board_size.x)
 
 func _enter_tree() -> void:
@@ -56,6 +59,10 @@ func _process(_delta: float) -> void:
 	if !is_processing_board:
 		return
 	
+	if multiplayer.multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED && !is_multiplayer_authority():
+		sync_network_data()
+		return
+	
 	if is_auto_dropping_blocks:
 		process_auto_drops()
 		return
@@ -64,6 +71,10 @@ func _process(_delta: float) -> void:
 	process_block_rotation()
 	process_horizontal_movement()
 	process_vertical_movement()
+
+func sync_network_data() -> void:
+	# TODO Sync to network data
+	pass
 
 ##################################
 #####INITIALIZATION FUNCTIONS#####

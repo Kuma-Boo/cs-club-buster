@@ -1,47 +1,77 @@
 extends Node
 
 signal host_created
+signal peer_created
 signal network_server_disconnected
 
-var is_host : bool = false
+var is_hosting_game : bool
 var _port = 8890
-var host_ip = "tomfol.io"
-var current_game_id = ""
+var active_game_id : String
+var _current_host_oid = ""
+var network_statuses : Dictionary[int, int]
+
+func get_player_count() -> int:
+	return network_statuses.keys().size()
+
+@rpc("any_peer", "call_local")
+func set_network_status(network_id : int, status : int):
+	if !NetworkManager.is_hosting_game:
+		return
+	network_statuses[network_id] = status
+
+@rpc("any_peer", "call_local")
+func get_network_status(network_id : int) -> int:
+	return network_statuses[network_id]
+
+@rpc("any_peer", "call_local")
+func register_network_id(network_id : int) -> void:
+	if !NetworkManager.is_hosting_game:
+		return
+	
+	NetworkManager.network_statuses[network_id] = 0
+	print("Number of players in lobby: %s" % get_player_count())
+
+@rpc("any_peer", "call_local")
+func unregister_network_id(network_id : int) -> void:
+	if !NetworkManager.is_hosting_game:
+		return
+	
+	if !NetworkManager.network_statuses.has(network_id):
+		return
+	NetworkManager.network_statuses.erase(network_id)
+	print("Number of players in lobby: %s" % get_player_count())
 
 func start_network_signals():
 	print("Noray network ready!")
-	if is_host:
-		setup_host_connection_signals()
+	if is_hosting_game:
+		setup_host_noray_connection_signals()
 	else:
-		setup_client_connection_signals()
+		setup_client_noray_connection_signals()
 
 # Hosting Noray - entry point
-func create_server_peer() -> void:
+func create_server_peer(host_ip : String):
 	print("Create Noray server peer")
-	await _register_with_noray()
+	await _register_with_noray(host_ip)
 	_start_noray_host()
-
+	
 # Joining Noray as client - entry point
-func create_client_peer(game_id : String):
+func create_client_peer(host_ip : String, game_id : String):
 	print("create Noray client peer")
 	
 	# Stash the game id (oid)
-	current_game_id = game_id
-	await _register_with_noray()
+	_current_host_oid = game_id
+	await _register_with_noray(host_ip)
 	
 	setup_client_enet_connection_signals()
 	
 	Noray.connect_nat(game_id)
 
-# Use this to kill the network connection and clean up for return to main menu
-func disconnect_from_game():
-	multiplayer.multiplayer_peer = null # Disconnect peer
 
-func _register_with_noray():
+func _register_with_noray(host_ip: String):
 	print("Register with Noray hosted at: %s" % host_ip)
 	var err = OK
 	
-	# Connect to Noray
+	# connect to Noray
 	err = await Noray.connect_to_host(host_ip, _port)
 	if err != OK:
 		print("Failed to connect to Noray for registration at %s:%s" % [host_ip, _port, err])
@@ -53,8 +83,7 @@ func _register_with_noray():
 	
 	# Capture game_id to display on host-peer for sharing with others
 	print("Noray oid/gameId: %s" % Noray.oid)
-	current_game_id = Noray.oid
-	host_created.emit()
+	NetworkManager.active_game_id = Noray.oid
 	
 	# Register remove address
 	err = await Noray.register_remote()
@@ -74,6 +103,8 @@ func _start_noray_host():
 	
 	if err != OK:
 		print("Failed to listen on port %s with error: %s" % [Noray.local_port, err])
+	
+	host_created.emit()
 
 
 func _handle_noray_client_connect(address: String, port: int) -> Error:
@@ -93,7 +124,7 @@ func _handle_nat_connect(address: String, port: int) -> Error:
 	var err = await _handle_connect(address, port)
 	if err != OK:
 		print("NAT connection failed from client, trying Relay instead...")
-		Noray.connect_relay(current_game_id)
+		Noray.connect_relay(_current_host_oid)
 		return OK
 	else:
 		print("NAT punchthrough successful!")
@@ -127,13 +158,16 @@ func _handle_connect(address: String, port: int) -> Error:
 		return err
 		
 	multiplayer.multiplayer_peer = peer
+	peer_created.emit()
 	return OK
 
-func setup_host_connection_signals() -> void:
+
+# Noray connection signals
+func setup_host_noray_connection_signals():
 	Noray.on_connect_nat.connect(_handle_noray_client_connect)
 	Noray.on_connect_relay.connect(_handle_noray_client_connect)
-	
-func setup_client_connection_signals() -> void:
+
+func setup_client_noray_connection_signals():
 	Noray.on_connect_nat.connect(_handle_nat_connect)
 	Noray.on_connect_relay.connect(_handle_relay_connect)
 
