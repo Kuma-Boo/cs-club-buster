@@ -6,6 +6,9 @@ signal on_lose()
 @export var result_label : Label
 @export var result_animation_player : AnimationPlayer
 
+func init() -> void:
+	result_animation_player.play("init")
+
 func lose() -> void:
 	result_label.text = "OVERFLOW..."
 	result_animation_player.play("lose")

@@ -698,7 +698,6 @@ expand_mode = 1
 libraries = {
 &"": SubResource("AnimationLibrary_hg6bp")
 }
-autoplay = "init"
 
 [node name="Borders" type="NinePatchRect" parent="Root"]
 z_index = 20

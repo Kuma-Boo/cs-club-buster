@@ -1,10 +1,6 @@
-### Responsible for spawning blocks and keeping them synced across the network.
+### Responsible for adding blocks to a game board.
 class_name BlockSpawner extends Node2D
 
-## The list of numbers, shared across players.
-static var value_queue : Array[Block.VALUE_ENUM]
-## Chance to get 0.
-static var zero_chance : float = 0.5
 ## The current index to look up in the value queue.
 var value_index : int = 0
 
@@ -15,10 +11,6 @@ var initial_block_grid_position : Vector2i
 
 ## Queue of currently instanced (but inactive) blocks.
 var block_pool : Array[Block]
-
-func _exit_tree() -> void:
-	if value_queue.size() != 0:
-		value_queue.clear()
 
 ## Creates a new block and adds it to the block pool.
 func generate_block() -> void:
@@ -50,19 +42,11 @@ func dequeue_block(type : Block.VALUE_ENUM, grid_position : Vector2i, visual_pos
 ## Returns the next block in the sequence.
 func get_next_block_value() -> Block.VALUE_ENUM:
 	var return_value : Block.VALUE_ENUM
-	if value_index < value_queue.size():
-		return_value = value_queue.get(value_index)
-		value_index += 1
-		return return_value
-	
-	return_value = Block.VALUE_ENUM.ZERO if randf() < zero_chance else Block.VALUE_ENUM.ONE
+	return_value = BlockValueGenerator.instance.get_value_at(value_index)
 	value_index += 1
-	value_queue.append(return_value) # Add to queue for other players
-	if return_value == Block.VALUE_ENUM.ZERO:
-		zero_chance -= 0.1
-	else:
-		zero_chance += 0.1
-	zero_chance = clamp(zero_chance, 0, 1)
+	
+	if value_index == BlockValueGenerator.instance.value_queue.size():
+		BlockValueGenerator.instance.rpc("queue_block_value")
 	return return_value
 
 ## Dequeues a block as a normal gameplay block.

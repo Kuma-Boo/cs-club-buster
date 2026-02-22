@@ -30,8 +30,9 @@ func attempt_initialization() -> void:
 	initialize_players()
 
 func initialize_players() -> void:
+	var last_key = NetworkManager.network_statuses.keys().get(NetworkManager.network_statuses.keys().size() - 1)
 	for id in NetworkManager.network_statuses.keys():
-		rpc("_add_player_to_game", id)
+		rpc("_add_player_to_game", id, id == last_key)
 
 @rpc("any_peer", "call_local")
 func _on_peer_ready(network_id) -> void:
@@ -40,7 +41,7 @@ func _on_peer_ready(network_id) -> void:
 	NetworkManager.set_network_status(network_id, 1)
 
 @rpc("authority", "call_local", "unreliable_ordered")
-func _add_player_to_game(network_id: int):
+func _add_player_to_game(network_id: int, is_final_player : bool):
 	print("Adding player to game: %s" % network_id)
 	
 	if _players_in_game.get(network_id) == null:
@@ -53,6 +54,9 @@ func _add_player_to_game(network_id: int):
 		player_to_add.set_multiplayer_authority(network_id)
 	else:
 		print("Warning! Attempted to add existing player to game: %s" % network_id)
+	
+	if is_final_player:
+		NetworkManager.set_network_status(network_id, 1)
 
 func _remove_player_from_game(network_id: int):
 	if is_multiplayer_authority():

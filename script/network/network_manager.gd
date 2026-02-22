@@ -5,6 +5,7 @@ signal peer_created
 signal network_server_disconnected
 
 var is_hosting_game : bool
+var is_online : bool = false
 var _port = 8890
 var active_game_id : String
 var _current_host_oid = ""
@@ -104,6 +105,7 @@ func _start_noray_host():
 	if err != OK:
 		print("Failed to listen on port %s with error: %s" % [Noray.local_port, err])
 	
+	is_online = true
 	host_created.emit()
 
 
@@ -158,6 +160,7 @@ func _handle_connect(address: String, port: int) -> Error:
 		return err
 		
 	multiplayer.multiplayer_peer = peer
+	is_online = true
 	peer_created.emit()
 	return OK
 
@@ -177,4 +180,5 @@ func setup_client_enet_connection_signals():
 
 func _noray_server_disconnected():
 	print("Noray server disconnected")
+	is_online = false
 	network_server_disconnected.emit()

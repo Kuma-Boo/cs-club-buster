@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdjc0dulifse4"]
+
+[ext_resource type="Script" uid="uid://b56l11lg22hru" path="res://script/game/board/block_value_generator.gd" id="1_mlhih"]
+
+[node name="BlockValueGenerator" type="Node"]
+script = ExtResource("1_mlhih")

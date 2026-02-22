@@ -26,7 +26,7 @@ func _process(_delta: float) -> void:
 			if is_zero_approx(activation_timer):
 				show_menu()
 		
-		if allow_pausing && Input.is_action_just_pressed("pause"):
+		if !NetworkManager.is_online && allow_pausing && Input.is_action_just_pressed("pause"):
 			is_pause_menu = true
 			show_menu()
 		return

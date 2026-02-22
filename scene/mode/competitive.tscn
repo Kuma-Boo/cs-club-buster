@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ocj0n8c4ryb6"]
+[gd_scene load_steps=4 format=3 uid="uid://ocj0n8c4ryb6"]
 
 [ext_resource type="PackedScene" uid="uid://gn1jfkrk1gwn" path="res://scene/object/game_board.tscn" id="1_f2obq"]
 [ext_resource type="PackedScene" uid="uid://cmk4oy0awp3og" path="res://scene/menu/result_menu.tscn" id="2_f2obq"]
+[ext_resource type="PackedScene" uid="uid://cdjc0dulifse4" path="res://scene/object/block_value_generator.tscn" id="3_dykdd"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -41,10 +42,11 @@ layout_mode = 2
 
 [node name="GameBoard2" parent="GameBoards" instance=ExtResource("1_f2obq")]
 layout_mode = 2
-board_index = 2
 
 [node name="ResultMenu" parent="." instance=ExtResource("2_f2obq")]
 layout_mode = 1
+
+[node name="BlockValueGenerator" parent="." instance=ExtResource("3_dykdd")]
 
 [connection signal="blocks_sent" from="GameBoards/GameBoard1" to="GameBoards/GameBoard2" method="recieve_penalty_blocks"]
 [connection signal="blocks_sent" from="GameBoards/GameBoard2" to="GameBoards/GameBoard1" method="recieve_penalty_blocks"]

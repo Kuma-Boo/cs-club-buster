@@ -43,11 +43,25 @@ func _ready() -> void:
 	initialize_board()
 	initialize_block_spawner()
 	
-	if multiplayer.multiplayer_peer.get_connection_status() != MultiplayerPeer.CONNECTION_CONNECTED:
-		input_manager.player_index = get_index() + 1
-	else:
-		input_manager.player_index = 1
+	BlockValueGenerator.instance.initialized.connect(start_game)
+	
+	input_manager.player_index = 1 if NetworkManager.is_online else get_index() + 1
 	penalty_manager.initialize_penalty_block_spawn_positions(board_size.x)
+
+func start_game() -> void:
+	if !NetworkManager.is_online:
+		results.init()
+		return
+	
+	if !NetworkManager.is_hosting_game:
+		return
+	print("game rpc started")
+		
+	rpc("start_rpc_game")
+
+@rpc("any_peer", "call_local")
+func start_rpc_game():
+	get_tree().create_timer(1.0 - NetworkTimeSynchronizer.remote_offset).timeout.connect(results.init);
 
 func _enter_tree() -> void:
 	BoardObserver.register_game_board(self)
@@ -59,7 +73,7 @@ func _process(_delta: float) -> void:
 	if !is_processing_board:
 		return
 	
-	if multiplayer.multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED && !is_multiplayer_authority():
+	if NetworkManager.is_online && !is_multiplayer_authority():
 		sync_network_data()
 		return
 	

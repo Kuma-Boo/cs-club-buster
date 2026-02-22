@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwlgca34ny2t7"]
+[gd_scene load_steps=4 format=3 uid="uid://cwlgca34ny2t7"]
 
 [ext_resource type="PackedScene" uid="uid://cmk4oy0awp3og" path="res://scene/menu/result_menu.tscn" id="2_625ue"]
 [ext_resource type="Script" uid="uid://c5r6ecvr7fhed" path="res://script/network/multiplayer_manager.gd" id="2_p23wu"]
+[ext_resource type="PackedScene" uid="uid://cdjc0dulifse4" path="res://scene/object/block_value_generator.tscn" id="3_625ue"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -36,9 +37,11 @@ grow_vertical = 0
 theme_override_constants/separation = 750
 alignment = 1
 
+[node name="ResultMenu" parent="." instance=ExtResource("2_625ue")]
+layout_mode = 1
+
 [node name="MultiplayerManager" type="Node" parent="." node_paths=PackedStringArray("_player_spawn_parent")]
 script = ExtResource("2_p23wu")
 _player_spawn_parent = NodePath("../GameBoards")
 
-[node name="ResultMenu" parent="." instance=ExtResource("2_625ue")]
-layout_mode = 1
+[node name="BlockValueGenerator" parent="." instance=ExtResource("3_625ue")]

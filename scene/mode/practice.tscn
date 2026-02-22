@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8po21fsi87q5"]
+[gd_scene load_steps=3 format=3 uid="uid://b8po21fsi87q5"]
 
 [ext_resource type="PackedScene" uid="uid://gn1jfkrk1gwn" path="res://scene/object/game_board.tscn" id="1_k3ndx"]
+[ext_resource type="PackedScene" uid="uid://cdjc0dulifse4" path="res://scene/object/block_value_generator.tscn" id="2_k3ndx"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -35,3 +36,5 @@ offset_bottom = -160.0
 grow_horizontal = 2
 grow_vertical = 0
 movement_interval = 100.0
+
+[node name="BlockValueGenerator" parent="." instance=ExtResource("2_k3ndx")]

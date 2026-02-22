@@ -12,7 +12,7 @@ func get_player_prefix() -> String:
 	return "p%s_" % player_index
 
 func _process(_delta : float) -> void:
-	if multiplayer.multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED && !is_multiplayer_authority():
+	if NetworkManager.is_online && !is_multiplayer_authority():
 		return
 	
 	process_movement_axis()
