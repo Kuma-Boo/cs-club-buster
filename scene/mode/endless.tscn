@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvbklfjoeitri"]
+[gd_scene load_steps=5 format=3 uid="uid://cvbklfjoeitri"]
 
 [ext_resource type="PackedScene" uid="uid://gn1jfkrk1gwn" path="res://scene/object/game_board.tscn" id="1_7iu3m"]
+[ext_resource type="Script" uid="uid://iey6rirw6qtr" path="res://script/game/board/board_speed_manager.gd" id="2_3ven2"]
 [ext_resource type="PackedScene" uid="uid://bor27i7u4t458" path="res://scene/interfaces/endless_hud.tscn" id="2_rtsw2"]
 [ext_resource type="PackedScene" uid="uid://cmk4oy0awp3og" path="res://scene/menu/result_menu.tscn" id="3_0wqvh"]
 
@@ -21,7 +22,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.8215152, 0.8746711, 0.98094445, 1)
+color = Color(0.62173975, 0.75058776, 1, 1)
 
 [node name="GameBoard1" parent="." instance=ExtResource("1_7iu3m")]
 layout_mode = 0
@@ -30,6 +31,12 @@ offset_top = 728.0
 offset_right = 536.0
 offset_bottom = 728.0
 
+[node name="BoardSpeedManager" type="Node" parent="GameBoard1" node_paths=PackedStringArray("board")]
+script = ExtResource("2_3ven2")
+board = NodePath("..")
+speed_amounts = Array[float]([0.4, 0.3, 0.2, 0.1])
+speed_thresholds = Array[int]([20, 40, 60, 80])
+
 [node name="EndlessHud" parent="." instance=ExtResource("2_rtsw2")]
 layout_mode = 1
 anchor_left = 0.5
@@ -37,14 +44,16 @@ anchor_right = 1.0
 offset_left = 64.0
 offset_top = 160.0
 offset_right = -192.0
-offset_bottom = -544.0
+offset_bottom = -132.0
 
 [node name="ResultMenu" parent="." instance=ExtResource("3_0wqvh")]
 layout_mode = 1
 
+[connection signal="blocks_destroyed" from="GameBoard1" to="GameBoard1/BoardSpeedManager" method="recieve_lines"]
 [connection signal="blocks_destroyed" from="GameBoard1" to="EndlessHud" method="on_blocks_destroyed"]
 [connection signal="board_cleared" from="GameBoard1" to="EndlessHud" method="on_board_cleared"]
 [connection signal="board_filled" from="GameBoard1" to="EndlessHud" method="end_game"]
 [connection signal="board_filled_no_ref" from="GameBoard1" to="ResultMenu" method="show_menu"]
 [connection signal="board_started" from="GameBoard1" to="EndlessHud" method="start_game"]
 [connection signal="chain_ended" from="GameBoard1" to="EndlessHud" method="on_chain_ended"]
+[connection signal="speed_changed" from="GameBoard1/BoardSpeedManager" to="EndlessHud" method="set_level"]

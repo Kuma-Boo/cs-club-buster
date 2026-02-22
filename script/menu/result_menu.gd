@@ -64,6 +64,7 @@ func show_menu() -> void:
 	get_tree().paused = true
 
 func on_menu_shown() -> void:
+	animator.play("select-" + str(current_selection))
 	is_processing_menu = true
 
 func unpause() -> void:

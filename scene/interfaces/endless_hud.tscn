@@ -79,7 +79,7 @@ _data = {
 &"init": SubResource("Animation_hqp30")
 }
 
-[node name="EndlessHud" type="Control" node_paths=PackedStringArray("time_label", "score_label", "block_label", "bonus_label", "bonus_animation_player")]
+[node name="EndlessHud" type="Control" node_paths=PackedStringArray("time_label", "score_label", "level_label", "block_label", "bonus_label", "bonus_animation_player")]
 layout_mode = 3
 anchor_right = 0.4
 anchor_bottom = 1.0
@@ -88,9 +88,10 @@ grow_vertical = 2
 script = ExtResource("1_ct7l1")
 time_label = NodePath("Data/Values/Time")
 score_label = NodePath("Data/Values/Score")
+level_label = NodePath("Data/Values/Level")
 block_label = NodePath("Data/Values/Cleared")
-bonus_label = NodePath("Bonus")
-bonus_animation_player = NodePath("Bonus/BonusAnimationPlayer")
+bonus_label = NodePath("BonusPosition/Bonus")
+bonus_animation_player = NodePath("BonusPosition/Bonus/BonusAnimationPlayer")
 
 [node name="Data" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -131,6 +132,26 @@ text = "SCORE"
 label_settings = ExtResource("2_wcobp")
 
 [node name="Gradient" type="TextureRect" parent="Data/Labels/Score"]
+material = SubResource("CanvasItemMaterial_wcobp")
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ohw2p")
+expand_mode = 1
+
+[node name="Level" type="Label" parent="Data/Labels"]
+clip_children = 2
+layout_mode = 2
+text = "LEVEL"
+label_settings = ExtResource("2_wcobp")
+
+[node name="Gradient" type="TextureRect" parent="Data/Labels/Level"]
 material = SubResource("CanvasItemMaterial_wcobp")
 layout_mode = 1
 anchors_preset = -1
@@ -209,6 +230,27 @@ grow_vertical = 2
 texture = ExtResource("3_ohw2p")
 expand_mode = 1
 
+[node name="Level" type="Label" parent="Data/Values"]
+clip_children = 2
+layout_mode = 2
+text = "01"
+label_settings = ExtResource("2_wcobp")
+horizontal_alignment = 2
+
+[node name="Gradient" type="TextureRect" parent="Data/Values/Level"]
+material = SubResource("CanvasItemMaterial_wcobp")
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ohw2p")
+expand_mode = 1
+
 [node name="Cleared" type="Label" parent="Data/Values"]
 clip_children = 2
 layout_mode = 2
@@ -232,31 +274,33 @@ expand_mode = 1
 
 [node name="BonusPosition" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_top = -256.0
-offset_bottom = -256.0
+offset_left = -320.0
+offset_top = 256.0
+offset_right = 320.0
+offset_bottom = 320.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Bonus" type="Label" parent="."]
+[node name="Bonus" type="Label" parent="BonusPosition"]
 clip_children = 2
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-offset_top = 192.0
-offset_bottom = 256.0
+anchor_bottom = 0.5
+offset_top = -27.5
+offset_bottom = 27.5
 grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(288, 32)
 text = "1 CHAIN!"
 label_settings = ExtResource("2_wcobp")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Gradient" type="TextureRect" parent="Bonus"]
+[node name="Gradient" type="TextureRect" parent="BonusPosition/Bonus"]
 material = SubResource("CanvasItemMaterial_wcobp")
 layout_mode = 1
 anchors_preset = -1
@@ -270,7 +314,7 @@ grow_vertical = 2
 texture = ExtResource("3_ohw2p")
 expand_mode = 1
 
-[node name="BonusAnimationPlayer" type="AnimationPlayer" parent="Bonus"]
+[node name="BonusAnimationPlayer" type="AnimationPlayer" parent="BonusPosition/Bonus"]
 libraries = {
 &"": SubResource("AnimationLibrary_pd010")
 }

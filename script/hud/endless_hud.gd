@@ -3,6 +3,7 @@ class_name HUD extends Node
 
 @export var time_label : Label
 @export var score_label : Label
+@export var level_label : Label
 @export var block_label : Label
 @export var bonus_label : Label
 @export var bonus_animation_player : AnimationPlayer
@@ -61,6 +62,10 @@ func on_blocks_destroyed(block_count : int, chain_count : int) -> void:
 		if is_board_clear_bonus_active:
 			bonus_string += " (x2)"
 		play_bonus(bonus_string)
+
+func set_level(level : int) -> void:
+	level_label.text = str("%02d" % (level + 1))
+	play_bonus("SPEED UP!")
 
 ## Plays the bonus animation
 func play_bonus(message : String) -> void:
