@@ -232,9 +232,12 @@ func process_vertical_movement() -> void:
 func start_processing_board() -> void:
 	is_processing_board = true
 	preview_block.update_grid_rotation(Vector2i.ZERO)
-	preview_block.set_value(block_spawner.get_next_block_value())
-	preview_block.spawn_as_preview_block()
 	emit_signal("board_started", self)
+
+@rpc("any_peer", "call_local")
+func set_preview_block(value : Block.VALUE_ENUM) -> void:
+	preview_block.set_value(value)
+	preview_block.spawn_as_preview_block()
 
 ## Finalizes a block's position and direction.
 func finalize_block_position(block : Block) -> void:
@@ -290,8 +293,7 @@ func spawn_block() -> void:
 		return
 	
 	current_block = block_spawner.dequeue_normal_block(preview_block.value)
-	preview_block.set_value(block_spawner.get_next_block_value())
-	preview_block.spawn_as_preview_block()
+	rpc("set_preview_block", block_spawner.get_next_block_value())
 	set_block_at_grid_position(current_block.grid_position, current_block)
 	input_manager.use_movement_axis()
 	vertical_timer = movement_interval
