@@ -45,7 +45,7 @@ func get_next_block_value() -> Block.VALUE_ENUM:
 	return_value = BlockValueGenerator.instance.get_value_at(value_index)
 	value_index += 1
 	
-	if value_index == BlockValueGenerator.instance.value_queue.size():
+	if value_index >= BlockValueGenerator.instance.value_queue.size() - 1:
 		BlockValueGenerator.instance.rpc("queue_block_value")
 	return return_value
 

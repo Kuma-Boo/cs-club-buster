@@ -22,7 +22,6 @@ func _process(_delta : float) -> void:
 		return
 	
 	for i in NetworkManager.network_statuses.keys():
-		print(NetworkManager.network_statuses[i])
 		if NetworkManager.network_statuses[i] != 1:
 			# A different scene is still loading
 			return

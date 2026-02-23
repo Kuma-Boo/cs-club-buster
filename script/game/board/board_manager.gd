@@ -73,7 +73,6 @@ func _process(_delta: float) -> void:
 		return
 	
 	if NetworkManager.is_online && !is_multiplayer_authority():
-		sync_network_data()
 		return
 	
 	if is_auto_dropping_blocks:
@@ -82,12 +81,27 @@ func _process(_delta: float) -> void:
 	
 	process_block_validity()
 	process_block_rotation()
+	
+	var block_pos : Vector2i = current_block.grid_position
 	process_horizontal_movement()
 	process_vertical_movement()
+	
+	if NetworkManager.is_online && block_pos != current_block.grid_position:
+		rpc("sync_network_data", current_block.grid_position)
 
-func sync_network_data() -> void:
-	# TODO Sync to network data
-	pass
+@rpc("any_peer")
+func rpc_spawn_current_block(type : Block.VALUE_ENUM) -> void:
+	current_block = block_spawner.dequeue_block(type, block_spawner.initial_block_grid_position, block_spawner.position)
+
+@rpc
+func sync_network_data(pos : Vector2i) -> void:
+	if current_block == null:
+		# Nothing to sync
+		return
+	
+	current_block.grid_position = pos
+	var target_position : Vector2 = calculate_block_position(current_block.grid_position)
+	current_block.set_target_position(target_position)
 
 ##################################
 #####INITIALIZATION FUNCTIONS#####
@@ -173,7 +187,7 @@ func process_block_validity() -> void:
 func process_block_rotation() -> void:
 	var rotation_input : int = input_manager.get_rotation_axis()
 	if rotation_input != 0:
-		current_block.rotate_grid_direction(rotation_input)
+		current_block.rpc("rotate_grid_direction", rotation_input)
 
 ## Processes horizontal movement for the current block.
 func process_horizontal_movement() -> void:
@@ -205,7 +219,8 @@ func process_vertical_movement() -> void:
 		# Force-drop the block
 		while can_move_block(current_block, Vector2i.DOWN):
 			move_block(current_block, Vector2i.DOWN)
-		finalize_block_position(current_block)
+		
+		rpc("finalize_block_position", current_block)
 		return
 	
 	if !is_zero_approx(vertical_timer):
@@ -218,7 +233,8 @@ func process_vertical_movement() -> void:
 	
 	if !can_move_block(current_block, Vector2i.DOWN):
 		# Block landed on something; finalize block's position and spawn a new block
-		finalize_block_position(current_block)
+		rpc("sync_network_data", current_block.grid_position)
+		rpc("finalize_block_position", current_block)
 		return
 	
 	# Move block down
@@ -240,6 +256,7 @@ func set_preview_block(value : Block.VALUE_ENUM) -> void:
 	preview_block.spawn_as_preview_block()
 
 ## Finalizes a block's position and direction.
+@rpc("authority", "call_local")
 func finalize_block_position(block : Block) -> void:
 	vertical_timer = 0 # Reset vertical timer
 	block.finish_drop() # Play animation
@@ -293,6 +310,7 @@ func spawn_block() -> void:
 		return
 	
 	current_block = block_spawner.dequeue_normal_block(preview_block.value)
+	rpc("rpc_spawn_current_block", preview_block.value)
 	rpc("set_preview_block", block_spawner.get_next_block_value())
 	set_block_at_grid_position(current_block.grid_position, current_block)
 	input_manager.use_movement_axis()

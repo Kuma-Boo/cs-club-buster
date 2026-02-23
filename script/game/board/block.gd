@@ -77,10 +77,12 @@ func initialize_as_preview_block() -> void:
 	direction_anim_player.advance(0.0)
 
 ## Rotates the block's grid direction clockwise (1) or counter-clockwise (-1).
+@rpc("any_peer", "call_local")
 func rotate_grid_direction(direction : int) -> void:
 	update_grid_rotation((grid_direction as Vector2).rotated(PI * 0.5 * direction).round() as Vector2i)
 
 ## Updates the visual direction.
+@rpc
 func update_grid_rotation(direction : Vector2i) -> void:
 	grid_direction = direction
 	if direction == Vector2i.ZERO:
