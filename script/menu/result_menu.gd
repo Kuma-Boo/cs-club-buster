@@ -51,6 +51,7 @@ func show_menu_with_delay(time : float) -> void:
 	activation_timer = time
 	use_activation_timer = true
 
+@rpc("any_peer", "call_local")
 func show_menu() -> void:
 	continue_option.visible = is_pause_menu;
 	current_selection = 0 if is_pause_menu else 1
@@ -73,7 +74,16 @@ func unpause() -> void:
 	get_tree().paused = false
 
 func load_scenes() -> void:
-	if current_selection == 1:
+	if NetworkManager.is_online && !NetworkManager.is_hosting_game:
+		return
+	
+	rpc("load_rpc_scene", current_selection == 1)
+
+@rpc("authority", "call_local")
+func load_rpc_scene(reload_scene : bool) -> void:
+	BoardObserver.unregister_all_boards()
+	if reload_scene:
 		get_tree().reload_current_scene()
 	else:
 		get_tree().change_scene_to_file("uid://58q5jdrm3e8w") # Load the main menu
+	

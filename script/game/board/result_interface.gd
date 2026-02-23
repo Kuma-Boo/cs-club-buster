@@ -9,11 +9,13 @@ signal on_lose()
 func init() -> void:
 	result_animation_player.play("init")
 
+@rpc("any_peer", "call_local")
 func lose() -> void:
 	result_label.text = "OVERFLOW..."
 	result_animation_player.play("lose")
 	emit_signal("on_lose")
 
+@rpc("any_peer", "call_local")
 func win() -> void:
 	result_label.text = "ALRIGHT!"
 	result_animation_player.play("win")

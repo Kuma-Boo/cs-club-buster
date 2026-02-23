@@ -289,7 +289,7 @@ func spawn_block() -> void:
 		emit_signal("board_filled", self)
 		emit_signal("board_filled_no_ref")
 		if lose_on_fill:
-			results.lose()
+			results.rpc("lose")
 		return
 	
 	current_block = block_spawner.dequeue_normal_block(preview_block.value)
