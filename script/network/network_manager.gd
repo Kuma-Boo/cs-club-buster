@@ -122,16 +122,20 @@ func _handle_noray_client_connect(address: String, port: int) -> Error:
 
 
 func _handle_nat_connect(address: String, port: int) -> Error:
-	print("Attempting to connect client via NAT: %s:%s" % [address, port])
-	var err = await _handle_connect(address, port)
-	if err != OK:
-		print("NAT connection failed from client, trying Relay instead...")
-		Noray.connect_relay(_current_host_oid)
-		return OK
-	else:
-		print("NAT punchthrough successful!")
-	return err
+	Noray.connect_relay(_current_host_oid)
+	return OK
 	
+	# TODO Uncomment this for NAT punchthrough
+	#print("Attempting to connect client via NAT: %s:%s" % [address, port])
+	#var err = await _handle_connect(address, port)
+	#if err != OK:
+		#print("NAT connection failed from client, trying Relay instead...")
+		#Noray.connect_relay(_current_host_oid)
+		#return OK
+	#else:
+		#print("NAT punchthrough successful!")
+	#return err
+
 func _handle_relay_connect(address: String, port: int) -> Error:
 	print("Attempting to connect client via Relay: %s:%s" % [address, port])
 	return await _handle_connect(address, port)
